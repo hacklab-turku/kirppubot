@@ -42,7 +42,7 @@
 
 # MCU name
 
-MCU = mega664p
+MCU = atmega644p
 
 
 # Processor frequency.
@@ -80,7 +80,7 @@ OBJDIR = ./obj
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = 
+SRC = $(TARGET).c ./stepper.c
 
 
 # List C++ source files here. (C dependencies are automatically generated.)
@@ -122,7 +122,7 @@ EXTRAINCDIRS =
 #     gnu89 = c89 plus GCC extensions
 #     c99   = ISO C99 standard (not yet fully implemented)
 #     gnu99 = c99 plus GCC extensions
-CSTANDARD = -std=c++0x
+CSTANDARD = -std=c99
 
 
 # Place -D or -U options here for C sources
