@@ -85,30 +85,25 @@ void setMotorDir(uint8_t motor, int8_t dir)	//translate desired directions of mo
 	
 }
 
-void stepMotors(uint16_t count)	//step all motors at once
+void stepMotors()	//step all motors at once
 {
-	for(; count>0; count--)
+	for(uint8_t i=0;i<=3;i++)	//for all the motors
 	{
-		for(uint8_t i=0;i<=3;i++)	//for all the motors
-		{
-			if(motorDir[i]!=0)	//toggle output pin if motor is desired to step
-				switch(i)
-				{
-					case MOTOR_FRONT_RIGHT:
-						MOTOR_FRONT_RIGHT_STEP;
-						break;
-					case MOTOR_BACK_RIGHT:
-						MOTOR_BACK_RIGHT_STEP;
-						break;
-					case MOTOR_BACK_LEFT:
-						MOTOR_BACK_LEFT_STEP;
-						break;
-					case MOTOR_FRONT_LEFT:
-						MOTOR_FRONT_LEFT_STEP;
-						break;
-				}
-
-		}
+		if(motorDir[i]!=0)	//toggle output pin if motor is desired to step
+			switch(i)
+			{
+				case MOTOR_FRONT_RIGHT:
+					MOTOR_FRONT_RIGHT_STEP;
+					break;
+				case MOTOR_BACK_RIGHT:
+					MOTOR_BACK_RIGHT_STEP;
+					break;
+				case MOTOR_BACK_LEFT:
+					MOTOR_BACK_LEFT_STEP;
+					break;
+				case MOTOR_FRONT_LEFT:
+					MOTOR_FRONT_LEFT_STEP;
+					break;
+			}
 	}
-
 }
