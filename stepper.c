@@ -21,11 +21,24 @@ void initMotors()
 	//front right motor
 	DDRB|=(1<<0);	//e-dir	as output
 	DDRB|=(1<<1);	//e-step as output
-	//enable motors
-	DDRC|=(1<<6);
-	PORTC&=~(1<<6);
+	//enables for the motors
 	DDRA|=(1<<5);
-	PORTA&=~(1<<5);
+	DDRC|=(1<<6);
+}
+
+void setMotorEnable(uint8_t status)
+{
+	if(status==0)	//motor disable
+	{
+		PORTC|=(1<<6);
+		PORTA|=(1<<5);
+	}
+	else	//motor enable
+	{
+		PORTC&=~(1<<6);
+		PORTA&=~(1<<5);
+	}
+
 }
 
 void setMotorDir(uint8_t motor, int8_t dir)	//translate desired directions of motors

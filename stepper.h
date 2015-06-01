@@ -33,5 +33,6 @@
 void initMotors();
 void setMotorDir(uint8_t motor, int8_t dir);
 void stepMotors();
+void setMotorEnable(uint8_t status);
 
 #endif
