@@ -7,24 +7,14 @@
 
 int main()
 {
+	uint8_t nes;
 	nessetup();
 	initMotors();
-	setMotorDir(MOTOR_FRONT_RIGHT, FORWARD);
-	setMotorDir(MOTOR_BACK_RIGHT, FORWARD);
-	setMotorDir(MOTOR_BACK_LEFT, FORWARD);
-	setMotorDir(MOTOR_FRONT_LEFT, FORWARD);
 
 	while(1)
 	{
-		if(nesread()&(1<<BUTTON_A))	//drive
-		{
-			setMotorEnable(1);
-			stepMotors();
-		}
-
-		if(nesread()&(1<<BUTTON_B))	//break
-			setMotorEnable(1);
-		else if(nesread()&(1<<BUTTON_LEFT))	//turn left
+		nes=nesread();
+		if(nes&(1<<BUTTON_LEFT))	//turn left
 		{
 			setMotorDir(MOTOR_FRONT_RIGHT, FORWARD);
 			setMotorDir(MOTOR_BACK_RIGHT, FORWARD);
@@ -33,7 +23,7 @@ int main()
 			setMotorEnable(1);
 			stepMotors();
 		}
-		else if(nesread()&(1<<BUTTON_RIGHT))	//turn right
+		else if(nes&(1<<BUTTON_RIGHT))	//turn right
 		{
 			setMotorDir(MOTOR_FRONT_RIGHT, REVERSE);
 			setMotorDir(MOTOR_BACK_RIGHT, REVERSE);
@@ -48,9 +38,16 @@ int main()
 			setMotorDir(MOTOR_BACK_RIGHT, FORWARD);
 			setMotorDir(MOTOR_BACK_LEFT, FORWARD);
 			setMotorDir(MOTOR_FRONT_LEFT, FORWARD);
-			setMotorEnable(0);
+			if(nes&(1<<BUTTON_A))	//drive
+			{
+				setMotorEnable(1);
+				stepMotors();
+			}
+			else if(nes&(1<<BUTTON_B))	//break
+				setMotorEnable(1);
+			else
+				setMotorEnable(0);
 		}
-		_delay_ms(1);
 	}
 
 }

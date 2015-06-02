@@ -22,21 +22,21 @@ void initMotors()
 	DDRB|=(1<<0);	//e-dir	as output
 	DDRB|=(1<<1);	//e-step as output
 	//enables for the motors
-	DDRA|=(1<<5);
-	DDRC|=(1<<6);
+	DDRA|=(1<<5);	//z-en as output
+	DDRC|=(1<<6);	//xye-en as output
 }
 
 void setMotorEnable(uint8_t status)
 {
 	if(status==0)	//motor disable
 	{
-		PORTC|=(1<<6);
 		PORTA|=(1<<5);
+		PORTD|=(1<<6);
 	}
 	else	//motor enable
 	{
-		PORTC&=~(1<<6);
 		PORTA&=~(1<<5);
+		PORTD&=~(1<<6);
 	}
 
 }
@@ -100,23 +100,24 @@ void setMotorDir(uint8_t motor, int8_t dir)	//translate desired directions of mo
 
 void stepMotors()	//step all motors at once
 {
-	for(uint8_t i=0;i<=3;i++)	//for all the motors
-	{
-		if(motorDir[i]!=0)	//toggle output pin if motor is desired to step
-			switch(i)
-			{
-				case MOTOR_FRONT_RIGHT:
-					MOTOR_FRONT_RIGHT_STEP;
-					break;
-				case MOTOR_BACK_RIGHT:
-					MOTOR_BACK_RIGHT_STEP;
-					break;
-				case MOTOR_BACK_LEFT:
-					MOTOR_BACK_LEFT_STEP;
-					break;
-				case MOTOR_FRONT_LEFT:
-					MOTOR_FRONT_LEFT_STEP;
-					break;
-			}
-	}
+	for(uint8_t j=0;j<2;j++)
+		for(uint8_t i=0;i<=3;i++)	//for all the motors
+		{
+			if(motorDir[i]!=0)	//toggle output pin if motor is desired to step
+				switch(i)
+				{
+					case MOTOR_FRONT_RIGHT:
+						MOTOR_FRONT_RIGHT_STEP;
+						break;
+					case MOTOR_BACK_RIGHT:
+						MOTOR_BACK_RIGHT_STEP;
+						break;
+					case MOTOR_BACK_LEFT:
+						MOTOR_BACK_LEFT_STEP;
+						break;
+					case MOTOR_FRONT_LEFT:
+						MOTOR_FRONT_LEFT_STEP;
+						break;
+				}
+		}
 }
