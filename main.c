@@ -1,15 +1,19 @@
 #include "./stepper.h"
 #include "./nes.h"
+#include "./usart.h"
 
 #include <avr/io.h>
 #include <avr/delay.h>
 #include <stdlib.h>
+#include <avr/interrupt.h>
 
 int main()
 {
 	uint8_t nes;
 	nessetup();
 	initMotors();
+	initUSART();
+	sei();
 
 	while(1)
 	{

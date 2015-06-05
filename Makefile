@@ -80,7 +80,7 @@ OBJDIR = ./obj
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c ./stepper.c ./nes.c
+SRC = $(TARGET).c ./stepper.c ./nes.c ./usart.c
 
 
 # List C++ source files here. (C dependencies are automatically generated.)
