@@ -18,4 +18,5 @@
 void nessetup();
 uint8_t nesread();
 void nesdebug();
+
 #endif

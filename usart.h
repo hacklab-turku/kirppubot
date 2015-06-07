@@ -7,5 +7,6 @@
 #include <avr/interrupt.h>
 
 void initUSART();
+uint8_t getCommand();
 
 #endif
